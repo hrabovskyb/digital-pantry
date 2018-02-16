@@ -1,0 +1,72 @@
+<html lang="en">
+
+<body>
+	
+	<div class="pageHeader">
+		<h1>Pantry Items</h1>		
+	</div>
+	<div class="alert alert-success" role="alert" id="addToListSuccess">
+		Successfully added item to shopping list. <a href="/shoppingList" id="popupLink" class="alert-link">Go to list</a>.
+	</div>
+	<div class="container">
+		<div class="row header">
+			<div class="col col-md-3">Item Name</div>
+			<div class="col col-md-1">Quantity</div>
+			<div class="col col-md-2">Unit</div>
+			<div class="col col-md-2">Category</div>
+			<div class="col col-md-1">Edit</div>
+			<div class="col col-md-1">Add to List</div>
+			<div class="col col-md-1">Remove</div>
+			<div class="col col-md-1">Low</div>
+		</div>
+		<div id="pantryItems">
+			{{#if items}}
+				{{#each items}}
+					<div id={{this._id}} class="row">
+						<div class="col col-md-3 col-sm-12 itemNameCol">{{this.itemName}}</div>
+						<div class="col col-md-1 quantityCol">{{this.quantity}}</div>
+						<div class="col col-md-2 UOMCol">{{this.UOM}}</div>
+						<div class="col col-md-2 categoryCol">{{this.category}}</div>
+						<div id="icons" >
+							<div class="col col-md-1 iconCol editButton"><a href="#"><img src="assets/img/editIcon.png" width="25px"></a></div>
+							<div class="col col-md-1 iconCol addButton"><a href="#"><img src="assets/img/addListIcon.png" width="25px"></a></div>
+							<div class="col col-md-1 iconCol deleteButton"><a href="#"><img src="assets/img/deleteIcon.png" width="25px"></a></div>
+							<div class="col col-md-1 iconCol lowButton"><a href="#"><p class="hiddenLowValue" style="display: none;">{{this.isLow}}</p><img class="lowButtonIcon" src="assets/img/emptyCircleIcon.png" width="25px"></a></div>
+						</div>
+					</div>
+				{{/each}}
+			{{/if}}
+		</div>
+	</div>
+	
+
+
+	
+		
+<script type="text/javascript">
+	document.getElementById("pantryTab").classList.add("active");
+
+	let lowValues = document.getElementsByClassName("hiddenLowValue");
+	for(let i=0; i<lowValues.length;i++){
+		if(lowValues[i].innerHTML == "true"){
+			let parent = lowValues[i].parentElement;
+			parent.children[1].src = "assets/img/almostEmptyIcon.png";
+			let emptyRow = lowValues[i].parentElement.parentElement.parentElement.parentElement;
+			emptyRow.style.backgroundColor = '#ffe6e6';
+			emptyRow.style.fontWeight = 'Bold';
+
+		}
+	}
+	
+	if(document.getElementById('addToListSuccess').style.display == 'block'){
+		document.getElementById('addToListSuccess').hide(1000);
+	}
+	
+
+</script>
+
+<script type="text/javascript" src="/assets/pantry.js"></script>
+
+</body>
+
+</html>

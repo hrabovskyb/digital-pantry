@@ -1,0 +1,243 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  font-family: sans-serif;
+  background-color: #f2f2f2;
+}
+
+#menu{
+  list-style-type: none;
+  background-color: #2a2a2a;
+  overflow: hidden;
+  margin-bottom: 10px; 
+}
+
+#menu li{
+  float: left;
+}
+
+#menu a{
+  color: #fafafa;
+  display: block;
+  vertical-align: middle;
+  line-height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-decoration:none;
+}
+
+#menu a:hover{
+  background-color: black;
+}
+
+.active{
+  background-color: #02be02;
+}
+.pageHeader{
+  width: 80%;
+  margin: auto;
+}
+
+/*-----------------------------------Pantry Styles-------------------------*/
+.row-centered{
+  margin: auto;
+}
+#pantryItemsTable{
+  width: 70%;
+  margin: auto;
+  height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 2px solid #ccc;
+  padding: 3px;
+}
+.pantryItems{
+  border-bottom: 2px solid black;
+}
+.pantryItems div{
+  padding: 5px;
+}
+
+
+/*---------------------------------Add items styles-------------------------*/
+#tempItemsTable{
+  width: 80%;
+  margin: auto;
+  height: 600px;
+  overflow-y: auto;
+  border: 2px solid #ccc;
+  padding: 3px;
+}
+.tempItems{
+  border-bottom: 2px solid black;
+}
+.tempItms div{
+  padding: 5px;
+}
+
+#addBarcodeForm{
+  margin-top: 10px;
+}
+
+#addBarcodeForm div{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#formBottom{
+  display: none;
+}
+
+/*-----------------------------Barcode Styles-------------------------------*/
+.barcode div{
+  display: inline-block;
+  padding: 5px;
+}
+
+.barcode{
+  border-bottom: 2px solid black;
+}
+
+#barcodeItemsTable{
+  width: 80%;
+  margin: auto;
+  height: 600px;
+  overflow-y: auto;
+  border: 2px solid #ccc;
+  padding: 3px;
+  /*display: block;*/
+}
+/*#tableContainer{
+  width: 98%;
+  margin: auto;
+}*/
+
+/*-----------------------Main Display Table Styles------------------------*/
+.container{
+  
+  /*margin-bottom: 25px;*/
+  /*margin-top: 25px;*/
+  /*width: 80%;*/
+  /*background-color: white;*/
+  /*position: relative;*/
+}
+.barcodeCol{
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+}
+.itemNameCol{
+  display: inline-block;
+  font-weight: bold;
+}
+.defaultQuantityCol, .quantityCol{
+  display: inline-block;
+  text-align: center;
+}
+.UOMCol{
+  display: inline-block;
+  text-align: center;
+}
+.categoryCol{
+  display: inline-block;
+  text-align: center;
+}
+.iconCol{
+  display: inline-block;
+  text-align: center;
+}
+
+.col{
+  padding:5px;
+  /*border: 1px solid black;*/
+  
+}
+.row{
+  border-bottom: 2px solid  #266ed9;
+  min-height: 35px;
+  background-color: white;
+}
+.header{
+  text-align: center;
+  font-weight: bold;
+  height: 50px;
+  padding: 5px;
+  vertical-align: text-bottom;
+  background-color: #9cfc9c;
+}
+.row:hover{
+ /* background-color: #f2f2f2;
+  font-weight: bold;*/
+}
+.header:hover{
+  background-color: #9cfc9c;
+}
+
+#formDiv{
+  display: none;
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  background-color: #ccc;
+  border: 2px solid black;
+}
+
+
+#addToListSuccess{
+  display: none;
+}
+
+.alert{
+  width: 50%;
+  left: 25%;
+  top: 20px;
+  z-index: 10;
+  position: absolute;
+}
+#addButtonDiv{
+  width: 175px;
+  text-align: center;
+  position: absolute;
+  right: 0px;
+  top: -50px;
+}
+#addToPantryButton{
+  /*float: right;*/
+  /*text-align: right;*/
+  color: black;
+  font-weight: bold;
+  display: block;
+  padding: 10px;
+  border: 2px solid black;
+  background-color: #ccc;
+  text-decoration: none;
+}
+#addToPantryButton:hover{
+  background-color: #9cfc9c;
+  cursor: pointer;
+}
+
+@media (max-width: 992px){
+  #icons{
+    float: right;
+  }
+  #icons .col{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .header .col{
+    display: none;
+  }
+  #pantryItems{
+    font-size: 24px;
+  }
+  .itemNameCol{
+    font-size: 28px;
+    
+  }
+}
