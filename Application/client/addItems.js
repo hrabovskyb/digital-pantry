@@ -4,9 +4,9 @@ const init = () => {
 
 	document.getElementById('barcodeInput').onchange = (e) => {
 		let value = e.target.value;
-		let splitString = value.slice(-2);
-		if (splitString == "//") {
-			let url = "/barcodeQuery/" + value.slice(0,value.length - 2);
+		// let splitString = value.slice(-2);
+		if (value.length > 0) {
+			let url = "/barcodeQuery/" + value;
 			$.ajax({
 				cache: false,
 				type: "POST",
@@ -16,7 +16,13 @@ const init = () => {
 					window.location = result.redirect;
 				},
 				error: (xhr, status, error) => {
-					document.getElementById('formBottom').style.display = "block";
+					var x = document.getElementsByClassName("formBottom");
+					var i;
+					for(i = 0; i < x.length; i++){
+						x[i].style.display = 'table-row';
+					}
+					document.getElementById("formSubmit").style.display = 'inline-block';
+					// document.getElementsByClassName("formBottom")[0].style.display = 'table-row';
 					console.log(error);
 				}
 			});
@@ -32,7 +38,7 @@ const init = () => {
 	};
 
 	$('.deleteButton').on('click', function(){
-		var parent_id = $(this).parent().attr('id');
+		var parent_id = $(this).parent().parent().attr('id');
 		console.log(parent_id);
 
 		let url = "/deleteTempItem/" + parent_id;
@@ -51,14 +57,14 @@ const init = () => {
  		
 	});
 
-	document.getElementById('showFormButton').onclick = (e) => {
-		var x = document.getElementById('formBottom');
-		if(x.style.display === "none"){
-			x.style.display = "block";
-		} else {
-			x.style.display = "none";
-		}
-	};
+	// document.getElementById('showFormButton').onclick = (e) => {
+	// 	var x = document.getElementById('formBottom');
+	// 	if(x.style.display === "none"){
+	// 		x.style.display = "block";
+	// 	} else {
+	// 		x.style.display = "none";
+	// 	}
+	// };
 
 	document.getElementById('addToPantryButton').onclick = (e) =>{
 		

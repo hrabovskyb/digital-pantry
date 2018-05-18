@@ -5,66 +5,72 @@
 	<div class="pageHeader">
 		<h1>Barcodes</h1>		
 	</div>
-	
+	<div id="barcodeFormContainer" class="container">
+		<button id="addBarcodeButton">Add Barcode >></button>
+		<div id="addBarcodeFormDiv"  style="display: none;">
 
-	
-	<div class="container">
-		<div class="row header">
-			<div class="col col-sm-2">Barcode</div>
-			<div class="col col-sm-3">Item Name</div>
-			<div class="col col-sm-2">Default Quantity</div>
-			<div class="col col-sm-1">Unit</div>
-			<div class="col col-sm-2">Category</div>
-			<div class="col col-sm-1">Edit</div>
-			<div class="col col-sm-1">Delete</div>
-		</div>
-		{{#if items}}
-			{{#each items}}
-				<div id={{this._id}} class="row">
-					<div class="col col-sm-2 barcodeCol">{{this.barcode}}</div>
-					<div class="col col-sm-3 itemNameCol">{{this.itemName}}</div>
-					<div class="col col-sm-2 quantityCol">{{this.defaultQuantity}}</div>
-					<div class="col col-sm-1 UOMCol">{{this.UOM}}</div>
-					<div class="col col-sm-2 categoryCol">{{this.category}}</div>
-					<div class="col col-sm-1 iconCol editButton"><a href="#"><img src="assets/img/editIcon.png" width="25px"></a></div>
-					<div class="col col-sm-1 iconCol deleteButton"><a href="#"><img src="assets/img/deleteIcon.png" width="25px"></a></div>
+			<form id="addBarcodeForm" action="/addBarcode">
+
+				<div>
+					<label for="barcode">Barcode:</label>
+					<input type="text" name="barcode">
 				</div>
-			{{/each}}
-		{{/if}}
+
+				<div>
+					<label for="itemName">Item Name:</label>
+					<input type="text" name="itemName">
+				</div>	
+				
+				<div>
+					<label for="defaultQuantity">Default Quantity:</label>
+					<input type="number" name="defaultQuantity">
+				</div>
+				<div>
+					<label for="UOM">Unit of Measure:</label>
+					<input type="text" name="UOM">
+				</div>
+				<div>
+				
+					<label for="category">Category:</label>
+					<input type="text" name="category">
+				</div>
+				<a id="formSubmit" href="#">Submit Form</a>
+
+			</form>
+			<a id="addBarcodeButton_save">Save</a>
+		</div>
 	</div>
 	
-	<button id="addBarcodeButton">Add Barcode</button>
-	<div id="formDiv">
-
-		<form id="addBarcodeForm" action="/addBarcode">
-
-			<div>
-				<label for="barcode">Barcode:</label>
-				<input type="text" name="barcode">
-			</div>
-
-			<div>
-				<label for="itemName">Item Name:</label>
-				<input type="text" name="itemName">
-			</div>	
-			
-			<div>
-				<label for="defaultQuantity">Default Quantity:</label>
-				<input type="number" name="defaultQuantity">
-			</div>
-			<div>
-				<label for="UOM">Unit of Measure:</label>
-				<input type="text" name="UOM">
-			</div>
-			<div>
-			
-				<label for="category">Category:</label>
-				<input type="text" name="category">
-			</div>
-			<a id="formSubmit" href="#">Submit Form</a>
-
-		</form>
+	<div class="container" id="barcode-table">
+		<div class="row header">
+			<div class="col col-md-2">Barcode</div>
+			<div class="col col-md-3">Item Name</div>
+			<div class="col col-md-2">Default Quantity</div>
+			<div class="col col-md-1">Unit</div>
+			<div class="col col-md-2">Category</div>
+			<div class="col col-md-1">Edit</div>
+			<div class="col col-md-1">Delete</div>
+		</div>
+		<div class="itemTable">
+			{{#if items}}
+				{{#each items}}
+					<div id={{this._id}} class="row">
+						<div class="col col-md-2 col-sm-12 barcodeCol">{{this.barcode}}</div>
+						<div class="col col-md-3 col-sm-12 itemNameCol">{{this.itemName}}</div>
+						<div class="col col-md-2 quantityCol">{{this.defaultQuantity}}</div>
+						<div class="col col-md-1 UOMCol">{{this.UOM}}</div>
+						<div class="col col-md-2 categoryCol">{{this.category}}</div>
+						<div class="icons" >
+							<div class="col col-md-1 iconCol editButton"><a href="#"><img src="assets/img/editIcon.png" width="25px"></a></div>
+							<div class="col col-md-1 iconCol deleteButton"><a href="#"><img src="assets/img/deleteIcon.png" width="25px"></a></div>
+						</div>
+					</div>
+				{{/each}}
+			{{/if}}
+		</div>
 	</div>
+	
+	
 	
 		
 <script type="text/javascript" src="/assets/barcodes.js"></script>

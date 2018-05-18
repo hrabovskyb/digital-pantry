@@ -17,6 +17,8 @@ const router = (app) => {
 	app.post("/toggleLowStatus/:_id",controllers.pantry.toggleLowStatus);
 	app.post('/addBarcode',controllers.barcode.addBarcode);
 	app.post("/addToPantry",controllers.pantry.addToPantry);
+	app.post("/editPantryItem",controllers.pantry.editPantryItem);
+	app.post("/pantryBarcodeScan/:barcode",controllers.pantry.pantryBarcodeScan);
 
 };
 

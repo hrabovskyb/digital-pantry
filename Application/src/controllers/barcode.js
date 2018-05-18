@@ -67,10 +67,11 @@ const deleteTempItem = (req, res) => {
 	});
 }
 const deleteBarcode = (req, res) => {
+	console.log(req.params._id);
 	barcode.barcodeModel.deleteOne({_id: req.params._id}).exec((err,docs)=>{
 		if(err){
 			console.log(err);
-			return res.status(400).json({error: 'An error occured during delete page load'});
+			return res.status(400).json({error: 'An error occured during delete barcode'});
 		}
 		return res.json({redirect: '/barcodes'});
 	});
@@ -84,11 +85,19 @@ const barcodeQuery = (req, res) => {
 			return res.status(400).json({error: 'An error occured during barcode query'});
 		}
 		if(count >= 1){ //if barcode is found in barcode database
-			barcode.tempItemModel.find({barcode: req.params.barcode}).exec((err, results)=>{
+			barcode.tempItemModel.find({itemName: docs[0].itemName}).exec((err, results)=>{
+				;
 				if(results.length > 0){
-					let query = {barcode: docs[0].barcode};
+					let query = {itemName: docs[0].itemName};
+
+					var barcodeData = results[0].barcode;
+
+					if(results[0].barcode.includes(docs[0].barcode) == false){
+						barcodeData.push(docs[0].barcode);
+					}
+					
 					const data = {
-						barcode: docs[0].barcode,
+						barcode: barcodeData,
 						itemName: docs[0].itemName,
 						UOM: docs[0].UOM,
 						quantity: docs[0].defaultQuantity + results[0].quantity,

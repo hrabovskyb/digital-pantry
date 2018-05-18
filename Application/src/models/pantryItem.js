@@ -10,6 +10,9 @@ const convertId = mongoose.Types.ObjectId;
 
 
 const pantryItemSchema = new mongoose.Schema({
+	barcode:{
+		type:[String],
+	},
 	itemName:{
 		type: String,
 		required: true,

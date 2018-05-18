@@ -7,23 +7,25 @@
 	</div>
 	<div class="container">
 		<div class="row header">
-			<div class="col col-sm-3">Item Name</div>
-			<div class="col col-sm-2">Quantity</div>
-			<div class="col col-sm-2">Unit</div>
-			<div class="col col-sm-2">Category</div>
-			<div class="col col-sm-1">Edit</div>
-			<div class="col col-sm-1">Remove</div>
+			<div class="col col-md-3">Item Name</div>
+			<div class="col col-md-2">Quantity</div>
+			<div class="col col-md-2">Unit</div>
+			<div class="col col-md-2">Category</div>
+			<div class="col col-md-1">Edit</div>
+			<div class="col col-md-1">Remove</div>
 		</div>
-		<div id="shoppingItems">
+		<div id="shoppingItems" class="itemTable">
 			{{#if items}}
 				{{#each items}}
 					<div id={{this._id}} class="row">
-						<div class="col col-sm-3 itemNameCol">{{this.itemName}}</div>
-						<div class="col col-sm-2 quantityCol">{{this.quantity}}</div>
-						<div class="col col-sm-2 UOMCol">{{this.UOM}}</div>
-						<div class="col col-sm-2 categoryCol">{{this.category}}</div>
-						<div class="col col-sm-1 iconCol editButton"><a href="#"><img src="assets/img/editIcon.png" width="25px"></a></div>
-						<div class="col col-sm-1 iconCol deleteButton"><a href="#"><img src="assets/img/deleteIcon.png" width="25px"></a></div>
+						<div class="col col-md-3 col-sm-12 itemNameCol">{{this.itemName}}</div>
+						<div class="col col-md-2 quantityCol">{{this.quantity}}</div>
+						<div class="col col-md-2 UOMCol">{{this.UOM}}</div>
+						<div class="col col-md-2 categoryCol">{{this.category}}</div>
+						<div class="icons" >
+							<div class="col col-md-1 iconCol editButton"><a href="#"><img src="assets/img/editIcon.png" width="25px"></a></div>
+							<div class="col col-md-1 iconCol deleteButton"><a href="#"><img src="assets/img/deleteIcon.png" width="25px"></a></div>
+						</div>
 					</div>
 				{{/each}}
 			{{/if}}

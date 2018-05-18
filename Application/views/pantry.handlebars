@@ -3,7 +3,13 @@
 <body>
 	
 	<div class="pageHeader">
-		<h1>Pantry Items</h1>		
+		<h1>Pantry Items</h1>
+		<table style="margin-top:20px">
+			<tr>
+				<td><label style="margin-right: 10px">Barcode:</label></td>
+				<td><input type="text" name="barcode" id="barcodeInput"></td>
+			</tr>
+		</table>
 	</div>
 	<div class="alert alert-success" role="alert" id="addToListSuccess">
 		Successfully added item to shopping list. <a href="/shoppingList" id="popupLink" class="alert-link">Go to list</a>.
@@ -19,15 +25,16 @@
 			<div class="col col-md-1">Remove</div>
 			<div class="col col-md-1">Low</div>
 		</div>
-		<div id="pantryItems">
+		<div id="pantryItems" class="itemTable">
 			{{#if items}}
 				{{#each items}}
 					<div id={{this._id}} class="row">
-						<div class="col col-md-3 col-sm-12 itemNameCol">{{this.itemName}}</div>
+						<div class="itemBarcode" style="display: none;">{{this.barcode}}</div>
+						<div class="col col-md-3 col-sm-12 itemNameCol" id={{this.itemName}}>{{this.itemName}}</div>
 						<div class="col col-md-1 quantityCol">{{this.quantity}}</div>
 						<div class="col col-md-2 UOMCol">{{this.UOM}}</div>
 						<div class="col col-md-2 categoryCol">{{this.category}}</div>
-						<div id="icons" >
+						<div class="icons" >
 							<div class="col col-md-1 iconCol editButton"><a href="#"><img src="assets/img/editIcon.png" width="25px"></a></div>
 							<div class="col col-md-1 iconCol addButton"><a href="#"><img src="assets/img/addListIcon.png" width="25px"></a></div>
 							<div class="col col-md-1 iconCol deleteButton"><a href="#"><img src="assets/img/deleteIcon.png" width="25px"></a></div>
@@ -36,6 +43,61 @@
 					</div>
 				{{/each}}
 			{{/if}}
+		</div>
+	</div>
+
+	<div id="editModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h3>Edit Item</h3>
+			<form id="editingForm" action="/editPantryItem">
+				<table>
+					<tr>
+						<td class="labelCol"><label for="itemId">Item Id</label></td>
+						<td class="inputCol"><input id="itemIdInput" type="text" name="itemId" readonly></td>
+					</tr>
+					<tr>
+						<td class="labelCol"><label for="itemName">Item Name</label></td>
+						<td class="inputCol"><input id="itemNameInput" type="text" name="itemName"></td>
+					</tr>
+					<tr>
+						<td class="labelCol"><label for="quantity">Quantity</label></td>
+						<td class="inputCol"><input id="quantityInput" type="number" name="quantity"></td>
+					</tr>
+					<tr>
+						<td class="labelCol"><label for="UOM">Unit of Measure</label></td>
+						<td class="inputCol"><input id="uomInput" type="text" name="UOM"></td>
+					</tr>
+					<tr>
+						<td class="labelCol"><label for="category">Category</label></td>
+						<td class="inputCol"><input id="categoryInput" type="text" name="category"></td>
+					</tr>
+					
+				</table>
+				
+				
+			</form>
+			<table class="modalIcons">
+				<tr>
+					<td><h5>Save</h5></td>
+					<td><h5>Add to List</h5></td>
+					<td><h5>Delete</h5></td>
+					<td><h5>Low</h5></td>
+				</tr>
+				<tr>
+					<td><a id="editFormSubmit" href="#"><img src="assets/img/saveIcon.png" width="25px"></a></td>
+					<td class="addButton_editModal"><a href="#"><img src="assets/img/addListIcon.png" width="25px"></a></td>
+					<td class="deleteButton_editModal"><a href="#"><img src="assets/img/deleteIcon.png" width="25px"></a></td>
+					<td class="lowButton_editModal"><a href="#"><p class="hiddenLowValue" style="display: none;">{{this.isLow}}</p><img id="lowButtonIcon_editModal" src="assets/img/emptyCircleIcon.png" width="25px"></a></td>
+				</tr>
+			</table>
+			<!-- <div class="col col-md-3 iconCol"><a id="editFormSubmit" href="#">Save Changes</a></div>
+			<div class="col col-md-1 iconCol addButton_editModal"><a href="#"><img src="assets/img/addListIcon.png" width="25px"></a></div>
+			<div class="col col-md-1 iconCol deleteButton_editModal"><a href="#"><img src="assets/img/deleteIcon.png" width="25px"></a></div>
+			<div class="col col-md-1 iconCol lowButton_editModal"><a href="#"><p class="hiddenLowValue" style="display: none;">{{this.isLow}}</p><img class="lowButtonIcon" src="assets/img/emptyCircleIcon.png" width="25px"></a></div>
+			<div class="icons" >
+				
+			</div> -->
 		</div>
 	</div>
 	

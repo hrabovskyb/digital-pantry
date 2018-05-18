@@ -2,9 +2,39 @@
 
 <body>
 	<div style="width:80%; margin: auto;">
-		<h1>Add Items to Pantry</h1>
+		<div class="heading">
+			<h1>Add Items to Pantry</h1>
+			<div id="addButtonDiv">
+				<a id="addToPantryButton" href="#">Add Items to Pantry</a>
+			</div>
+		</div>
 		<form id="addBarcodeForm" action="/addBarcode">
-			<div>
+			<table>
+				<tr>
+					<td><label for="barcode">Barcode</label></td>
+					<td><input type="text" name="barcode" id="barcodeInput"></td>
+				</tr>
+				
+				<tr class="formBottom">
+					<td><label for="itemName">Item Name</label></td>
+					<td><input type="text" name="itemName"></td>
+				</tr>
+				<tr class="formBottom">
+					<td><label for="defaultQuantity">Default Quantity</label></td>
+					<td><input type="number" name="defaultQuantity"></td>
+				</tr>
+				<tr class="formBottom">
+					<td><label for="UOM">Unit of Measure</label></td>
+					<td><input type="text" name="UOM"></td>
+				</tr>
+				<tr class="formBottom">
+					<td><label for="category">Category</label></td>
+					<td><input type="text" name="category"></td>
+				</tr>
+				
+			</table>
+			<a id="formSubmit" href="#">Submit Form</a>
+			<!-- <div>
 				<label for="barcode">Barcode</label>
 				<input type="text" name="barcode" id="barcodeInput">
 			</div>
@@ -28,39 +58,41 @@
 					<label for="category">Category</label>
 					<input type="text" name="category">
 				</div>
-				<a id="formSubmit" href="#">Submit Form</a>
-			</div>
+				
+			</div> -->
 		</form>
-		<button id="showFormButton">Show Form</button>
+		<!-- <button id="showFormButton">Show Form</button> -->
 	</div>
 
 	<div class="container">
-		<div id="addButtonDiv">
-			<a id="addToPantryButton" href="#">Add Items to Pantry</a>
-		</div>
+		
 		
 		<div class="row header">
-			<div class="col col-sm-2">Barcode</div>
-			<div class="col col-sm-3">Item Name</div>
-			<div class="col col-sm-2">Quantity</div>
-			<div class="col col-sm-1">Unit</div>
-			<div class="col col-sm-2">Category</div>
-			<div class="col col-sm-1">Edit</div>
-			<div class="col col-sm-1">Delete</div>
+			<div class="col col-md-2">Barcode</div>
+			<div class="col col-md-3">Item Name</div>
+			<div class="col col-md-2">Quantity</div>
+			<div class="col col-md-1">Unit</div>
+			<div class="col col-md-2">Category</div>
+			<div class="col col-md-1">Edit</div>
+			<div class="col col-md-1">Delete</div>
 		</div>
-		{{#if items}}
-			{{#each items}}
-				<div id={{this._id}} class="row">
-					<div class="col col-sm-2 barcodeCol">{{this.barcode}}</div>
-					<div class="col col-sm-3 itemNameCol">{{this.itemName}}</div>
-					<div class="col col-sm-2 quantityCol">{{this.quantity}}</div>
-					<div class="col col-sm-1 UOMCol">{{this.UOM}}</div>
-					<div class="col col-sm-2 categoryCol">{{this.category}}</div>
-					<div class="col col-sm-1 iconCol editButton"><a href="#"><img src="assets/img/editIcon.png" width="25px"></a></div>
-					<div class="col col-sm-1 iconCol deleteButton"><a href="#"><img src="assets/img/deleteIcon.png" width="25px"></a></div>
-				</div>
-			{{/each}}
-		{{/if}}
+		<div class="itemTable">
+			{{#if items}}
+				{{#each items}}
+					<div id={{this._id}} class="row">
+						<div class="col col-md-2 col-sm-12 barcodeCol">{{this.barcode}}</div>
+						<div class="col col-md-3 col-sm-12 itemNameCol">{{this.itemName}}</div>
+						<div class="col col-md-2 quantityCol">{{this.quantity}}</div>
+						<div class="col col-md-1 UOMCol">{{this.UOM}}</div>
+						<div class="col col-md-2 categoryCol">{{this.category}}</div>
+						<div class="icons" >
+							<div class="col col-md-1 iconCol editButton"><a href="#"><img src="assets/img/editIcon.png" width="25px"></a></div>
+							<div class="col col-md-1 iconCol deleteButton"><a href="#"><img src="assets/img/deleteIcon.png" width="25px"></a></div>
+						</div>
+					</div>
+				{{/each}}
+			{{/if}}
+		</div>
 	</div>
 
 		

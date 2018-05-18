@@ -41,7 +41,7 @@ const barcodeSchema = new mongoose.Schema({
 
 const tempItemSchema = new mongoose.Schema({
 	barcode:{
-		type: String,
+		type: [String],
 		required: true,
 		trim: true,	
 	},

@@ -1,7 +1,7 @@
 $(document).ready(() => {	
 	
 	$('.deleteButton').on('click', function(){
-		var parent_id = $(this).parent().attr('id');
+		var parent_id = $(this).parent().parent().attr('id');
 		console.log(parent_id);
 
 		let url = "/deleteShoppingItem/" + parent_id;

@@ -9,7 +9,7 @@ $(document).ready(() => {
 	};
 
 	document.getElementById('addBarcodeButton').onclick = (e) => {
-		var x = document.getElementById('formDiv');
+		var x = document.getElementById('addBarcodeFormDiv');
 		if(x.style.display === "none"){
 			x.style.display = "block";
 		} else {
@@ -18,7 +18,7 @@ $(document).ready(() => {
 	};
 
 	$('.deleteButton').on('click', function(){
-		var parent_id = $(this).parent().attr('id');
+		var parent_id = $(this).parent().parent().attr('id');
 		console.log(parent_id);
 
 		let url = "/deleteBarcode/" + parent_id;
