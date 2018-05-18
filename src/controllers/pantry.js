@@ -68,12 +68,13 @@ const toggleLowStatus = (req, res) => {
 			category: docs[0].category,
 			isLow: lowStatus,
 		}
-		return pantryItem.pantryItemModel.updateOne(query,data).exec((err)=>{
+		pantryItem.pantryItemModel.updateOne(query,data).exec((err)=>{
 			if(err){
 				console.log(err);
 				return res.status(400).json({error: 'An error occured during delete page load'});
 			}
-			return res.json({redirect: '/'});
+			// console.log(lowStatus);
+			return res.send(lowStatus);
 		});
 
 		
@@ -121,32 +122,32 @@ const addToPantry = (req,res) => {
 				if(results.length>0){
 
 					
-					var barcodeData = results[0].barcode;
-					var uniqueBarcodes = [];
-					console.log(results[0].barcode); //pantry
-					console.log(docs[i].barcode); //temp
-					console.log(checkSuperbag(results[0].barcode,docs[i].barcode)); //temp in pantry
-					console.log(checkSuperbag(docs[i].barcode,results[0].barcode)); //pantry in temp
-					if(checkSuperbag(results[0].barcode,docs[i].barcode) == false && checkSuperbag(docs[i].barcode,results[0].barcode) == false){ //pantry not in temp, temp not in pantry
-						console.log('pantry not in temp, temp not in pantry');
-						barcodeData = barcodeData.concat(docs[i].barcode);
+					// var barcodeData = results[0].barcode;
+					// var uniqueBarcodes = [];
+					// console.log(results[0].barcode); //pantry
+					// console.log(docs[i].barcode); //temp
+					// console.log(checkSuperbag(results[0].barcode,docs[i].barcode)); //temp in pantry
+					// console.log(checkSuperbag(docs[i].barcode,results[0].barcode)); //pantry in temp
+					// if(checkSuperbag(results[0].barcode,docs[i].barcode) == false && checkSuperbag(docs[i].barcode,results[0].barcode) == false){ //pantry not in temp, temp not in pantry
+					// 	console.log('pantry not in temp, temp not in pantry');
+					// 	barcodeData = barcodeData.concat(docs[i].barcode);
 
-					} else if(checkSuperbag(docs[i].barcode,results[0].barcode) == true && checkSuperbag(results[0].barcode,docs[i].barcode) == false){ //pantry contained in temp, temp not in pantry 
-						console.log('pantry contained in temp, temp not in pantry');
-						barcodeData = docs[i].barcode;
-					} else if(checkSuperbag(results[0].barcode,docs[i].barcode) == true && checkSuperbag(docs[i].barcode,results[0].barcode) == false){ //temp in pantry, pantry not in temp [works]
-						console.log('temp in pantry, pantry not in temp');
-						barcodeData;
-					}
+					// } else if(checkSuperbag(docs[i].barcode,results[0].barcode) == true && checkSuperbag(results[0].barcode,docs[i].barcode) == false){ //pantry contained in temp, temp not in pantry 
+					// 	console.log('pantry contained in temp, temp not in pantry');
+					// 	barcodeData = docs[i].barcode;
+					// } else if(checkSuperbag(results[0].barcode,docs[i].barcode) == true && checkSuperbag(docs[i].barcode,results[0].barcode) == false){ //temp in pantry, pantry not in temp [works]
+					// 	console.log('temp in pantry, pantry not in temp');
+					// 	barcodeData;
+					// }
 
-					barcodeData.forEach(function(element){
-						if(uniqueBarcodes.includes(element) == false){
-							uniqueBarcodes.push(element);
-						}
-					});
+					// barcodeData.forEach(function(element){
+					// 	if(uniqueBarcodes.includes(element) == false){
+					// 		uniqueBarcodes.push(element);
+					// 	}
+					// });
 
 					const data = {
-						barcode: uniqueBarcodes,
+						barcode: docs[i].barcode,
 						itemName: docs[i].itemName,
 						UOM: docs[i].UOM,
 						quantity: docs[i].quantity + results[0].quantity,
@@ -157,7 +158,7 @@ const addToPantry = (req,res) => {
 					pantryItem.pantryItemModel.updateOne(query,data).exec((err)=>{
 						if(err){
 							console.log(err);
-							return res.status(400).json({error: 'An error occured during delete page load'});
+							return res.status(400).json({error: 'An error occured during update'});
 						}
 
 					});
@@ -238,7 +239,9 @@ const editPantryItem = (req,res) =>{
 const pantryBarcodeScan = (req,res) =>{
 	const convertId = mongoose.Types.ObjectId;
 	pantryItem.pantryItemModel.find({barcode: req.params.barcode}).exec((err,docs)=>{
-		console.log(docs.length);
+		if(docs.length == 0){
+			return res.status(400).json({error: 'This item is not in your pantry'});
+		}
 		const searchResults = {
 			_id: convertId(docs[0].id),
 			itemName: docs[0].itemName,
@@ -248,9 +251,7 @@ const pantryBarcodeScan = (req,res) =>{
 			isLow: docs[0].isLow,
 		};
 		// console.log(searchResults);
-		if(docs.length == 0){
-			return res.status(400).json({error: 'This item is not in your pantry'});
-		}
+		
 		return res.send(searchResults);
 		// json({redirect: '/'});
 		// return searchResults;

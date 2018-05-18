@@ -78,26 +78,27 @@ const deleteBarcode = (req, res) => {
 }
 
 const barcodeQuery = (req, res) => {
+	
 	barcode.barcodeModel.find({barcode: req.params.barcode}).exec((err,docs)=>{
-		var count = docs.length;	
 		if(err){
 			console.log(err);
 			return res.status(400).json({error: 'An error occured during barcode query'});
 		}
-		if(count >= 1){ //if barcode is found in barcode database
+		if(docs.length > 0){ //if barcode is found in barcode database
+			var scannedItem = docs[0].itemName;
 			barcode.tempItemModel.find({itemName: docs[0].itemName}).exec((err, results)=>{
-				;
-				if(results.length > 0){
+				
+				if(results.length > 0){ //an item already exists with the same item name that was just scanned
 					let query = {itemName: docs[0].itemName};
 
-					var barcodeData = results[0].barcode;
+					var barcodeData = results[0].barcode; //barcodes that are currently in the temporary item list
 
-					if(results[0].barcode.includes(docs[0].barcode) == false){
-						barcodeData.push(docs[0].barcode);
-					}
+					// if(results[0].barcode.includes(docs[0].barcode) == false){
+					// 	barcodeData.push(docs[0].barcode);
+					// }
 					
 					const data = {
-						barcode: barcodeData,
+						barcode: results[0].barcode,
 						itemName: docs[0].itemName,
 						UOM: docs[0].UOM,
 						quantity: docs[0].defaultQuantity + results[0].quantity,
@@ -110,24 +111,39 @@ const barcodeQuery = (req, res) => {
 						}
 						return res.json({redirect: '/addItems'});
 					});
-				} else {
-					const tempItemData = {
-						barcode: docs[0].barcode,
-						itemName: docs[0].itemName,
-						UOM: docs[0].UOM,
-						quantity: docs[0].defaultQuantity,
-						category: docs[0].category,
-					};
+				} else { //Item is not currently in the temp item list
 
-					const newTempItem = new barcode.tempItemModel(tempItemData);
-
-					return newTempItem.save((err) => {
+					
+					barcode.barcodeModel.find({itemName: scannedItem}).exec((err,results)=>{
+						var barcodeData = [];
 						if(err){
 							console.log(err);
-							return res.status(400).json({error: 'An error occured'});
+							return res.status(400).json({error: 'An error occured during barcode query'});
 						}
-						return res.json({ redirect: '/addItems'});
-					});
+						
+						for (i = 0; i < results.length; i++){
+							barcodeData.push(results[i].barcode);
+						}
+
+						const tempItemData = {
+							barcode: barcodeData,
+							itemName: docs[0].itemName,
+							UOM: docs[0].UOM,
+							quantity: docs[0].defaultQuantity,
+							category: docs[0].category,
+						};
+
+						const newTempItem = new barcode.tempItemModel(tempItemData);
+
+						return newTempItem.save((err) => {
+							if(err){
+								console.log(err);
+								return res.status(400).json({error: 'An error occured'});
+							}
+							return res.json({ redirect: '/addItems'});
+						});
+					
+					});					
 				}
 			});
 			

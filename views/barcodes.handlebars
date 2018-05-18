@@ -2,7 +2,7 @@
 
 <body>
 	
-	<div class="pageHeader">
+	<div class="container">
 		<h1>Barcodes</h1>		
 	</div>
 	<div id="barcodeFormContainer" class="container">
@@ -10,34 +10,36 @@
 		<div id="addBarcodeFormDiv"  style="display: none;">
 
 			<form id="addBarcodeForm" action="/addBarcode">
+				<table>
+					<tr>
+						<td><label for="barcode">Barcode:</label></td>
+						<td><input type="text" name="barcode"></td>
+					</tr>
 
-				<div>
-					<label for="barcode">Barcode:</label>
-					<input type="text" name="barcode">
-				</div>
-
-				<div>
-					<label for="itemName">Item Name:</label>
-					<input type="text" name="itemName">
-				</div>	
+					<tr>
+						<td><label for="itemName">Item Name:</label></td>
+						<td><input type="text" name="itemName"></td>
+					</tr>	
+					
+					<tr>
+						<td><label for="defaultQuantity">Default Quantity:</label></td>
+						<td><input type="number" name="defaultQuantity"></td>
+					</tr>
+					<tr>
+						<td><label for="UOM">Unit of Measure:</label></td>
+						<td><input type="text" name="UOM"></td>
+					</tr>
+					<tr>
+					
+						<td><label for="category">Category:</label></td>
+						<td><input type="text" name="category"></td>
+					</tr>
+				</table>
 				
-				<div>
-					<label for="defaultQuantity">Default Quantity:</label>
-					<input type="number" name="defaultQuantity">
-				</div>
-				<div>
-					<label for="UOM">Unit of Measure:</label>
-					<input type="text" name="UOM">
-				</div>
-				<div>
-				
-					<label for="category">Category:</label>
-					<input type="text" name="category">
-				</div>
-				<a id="formSubmit" href="#">Submit Form</a>
+				<!-- <a id="formSubmit" href="#">Submit Form</a> -->
 
 			</form>
-			<a id="addBarcodeButton_save">Save</a>
+			<a id="formSubmit">Save</a>
 		</div>
 	</div>
 	

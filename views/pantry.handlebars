@@ -2,7 +2,7 @@
 
 <body>
 	
-	<div class="pageHeader">
+	<div class="container">
 		<h1>Pantry Items</h1>
 		<table style="margin-top:20px">
 			<tr>
@@ -13,6 +13,9 @@
 	</div>
 	<div class="alert alert-success" role="alert" id="addToListSuccess">
 		Successfully added item to shopping list. <a href="/shoppingList" id="popupLink" class="alert-link">Go to list</a>.
+	</div>
+	<div class="alert alert-danger" role="alert" id="barcodeSearchError">
+		This item is not currently in your pantry.
 	</div>
 	<div class="container">
 		<div class="row header">
@@ -122,6 +125,10 @@
 	
 	if(document.getElementById('addToListSuccess').style.display == 'block'){
 		document.getElementById('addToListSuccess').hide(1000);
+	}
+
+	if(document.getElementById('barcodeSearchError').style.display == 'block'){
+		document.getElementById('barcodeSearchError').hide(1000);
 	}
 	
 

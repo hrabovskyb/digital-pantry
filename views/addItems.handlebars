@@ -1,68 +1,51 @@
 <html lang="en">
 
 <body>
-	<div style="width:80%; margin: auto;">
-		<div class="heading">
-			<h1>Add Items to Pantry</h1>
-			<div id="addButtonDiv">
-				<a id="addToPantryButton" href="#">Add Items to Pantry</a>
+	
+		<div class="container" style="margin-bottom: 0px;">
+			<div style="height:100px;">
+				<ul style="list-style-type: none;">
+					<li style="display:block; float:left;"><h1>Add Items to Pantry</h1></li>
+					<li style="display:block; float:right;">
+						<div id="addButtonDiv">
+							<a id="addToPantryButton" href="#">Add Current Items to Pantry</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<form id="addBarcodeForm" action="/addBarcode">
+					<table>
+						<tr>
+							<td><label for="barcode">Barcode</label></td>
+							<td><input type="text" name="barcode" id="barcodeInput"></td>
+						</tr>
+						
+						<tr class="formBottom">
+							<td><label for="itemName">Item Name</label></td>
+							<td><input type="text" name="itemName"></td>
+						</tr>
+						<tr class="formBottom">
+							<td><label for="defaultQuantity">Default Quantity</label></td>
+							<td><input type="number" name="defaultQuantity"></td>
+						</tr>
+						<tr class="formBottom">
+							<td><label for="UOM">Unit of Measure</label></td>
+							<td><input type="text" name="UOM"></td>
+						</tr>
+						<tr class="formBottom">
+							<td><label for="category">Category</label></td>
+							<td><input type="text" name="category"></td>
+						</tr>
+						
+					</table>
+					<a id="formSubmit" href="#" style="display: none; margin-top: 10px;">Submit Form</a>
+				</form>
 			</div>
 		</div>
-		<form id="addBarcodeForm" action="/addBarcode">
-			<table>
-				<tr>
-					<td><label for="barcode">Barcode</label></td>
-					<td><input type="text" name="barcode" id="barcodeInput"></td>
-				</tr>
-				
-				<tr class="formBottom">
-					<td><label for="itemName">Item Name</label></td>
-					<td><input type="text" name="itemName"></td>
-				</tr>
-				<tr class="formBottom">
-					<td><label for="defaultQuantity">Default Quantity</label></td>
-					<td><input type="number" name="defaultQuantity"></td>
-				</tr>
-				<tr class="formBottom">
-					<td><label for="UOM">Unit of Measure</label></td>
-					<td><input type="text" name="UOM"></td>
-				</tr>
-				<tr class="formBottom">
-					<td><label for="category">Category</label></td>
-					<td><input type="text" name="category"></td>
-				</tr>
-				
-			</table>
-			<a id="formSubmit" href="#">Submit Form</a>
-			<!-- <div>
-				<label for="barcode">Barcode</label>
-				<input type="text" name="barcode" id="barcodeInput">
-			</div>
-			
-			<div id="formBottom">
-				<div>
-					<label for="itemName">Item Name</label>
-					<input type="text" name="itemName">
-				</div>	
-				
-				<div>
-					<label for="defaultQuantity">Default Quantity</label>
-					<input type="number" name="defaultQuantity">
-				</div>
-				<div>
-					<label for="UOM">Unit of Measure</label>
-					<input type="text" name="UOM">
-				</div>
-				<div>
-				
-					<label for="category">Category</label>
-					<input type="text" name="category">
-				</div>
-				
-			</div> -->
-		</form>
+		
 		<!-- <button id="showFormButton">Show Form</button> -->
-	</div>
+	
 
 	<div class="container">
 		

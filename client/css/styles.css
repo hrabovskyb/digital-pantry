@@ -42,6 +42,7 @@ body{
   margin-bottom: 20px;
 }
 
+
 /*-----------------------------------Pantry Styles-------------------------*/
 .row-centered{
   margin: auto;
@@ -85,7 +86,7 @@ body{
 }
 
 #addBarcodeForm tr, #editingForm tr{
-  border: 5px solid #f2f2f2;
+  border: 5px solid rgba(255,255,255,0);
 }
 #addBarcodeForm label, #editingForm label{
   margin-right: 10px;
@@ -102,13 +103,11 @@ body{
 
 #addButtonDiv{
   width: 175px;
-
   margin-top: 20px; 
   margin-bottom: auto;
-
 }
-#addToPantryButton, #formSubmit{
 
+#addToPantryButton, #formSubmit, #addBarcodeButton {
   color: black;
   font-weight: bold;
   display: block;
@@ -120,10 +119,7 @@ body{
   width: 175px;
 }
 
-#formSubmit{
-  display: none;
-}
-#addToPantryButton:hover, #formSubmit:hover{
+#addToPantryButton:hover, #formSubmit:hover, #addBarcodeButton:hover{
   background-color: #9cfc9c;
   cursor: pointer;
 }
@@ -158,20 +154,7 @@ body{
   padding: 3px;
   /*display: block;*/
 }
-#addBarcodeButton_save{
-  padding-left: 25px !important;
-  padding-right: 25px !important;
-  
-}
 
-#barcodeFormContainer button, #barcodeFormContainer a{
-  background-color: #9cfc9c;
-  padding: 15px;
-  font-weight: bold;
-  border: 1px solid black;
-  text-decoration: none;
-  color: black;
-}
 
 #barcodeFormContainer a{
   margin-top: 15px;
@@ -181,16 +164,16 @@ body{
   cursor: pointer;
 }
 
-#addBarcodeFormDiv{
-  
+#addBarcodeFormDiv{ 
   /*width: 60%;*/
   margin: auto;
   padding: 20px;
   margin-top: 25px;
   margin-bottom: 15px;
-  background-color: #ccc;
+  background-color: #e6e6e6;
   border: 2px solid black;
 }
+
 
 /*---------------------------Edit modal------------------------------------*/
 
@@ -211,7 +194,7 @@ body{
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 50%;
+  width: 40%;
 }
 .modal-content table{
   width: 100%;
@@ -255,6 +238,7 @@ body{
   /*width: 80%;*/
   /*background-color: white;*/
   /*position: relative;*/
+  margin-bottom: 50px;
 }
 .barcodeCol{
   font-weight: bold;
@@ -322,7 +306,7 @@ body{
 }
 
 
-#addToListSuccess{
+#addToListSuccess, #barcodeSearchError{
   display: none;
 }
 
@@ -375,5 +359,8 @@ body{
   }
   .iconCol img{
     width: 40px;
+  }
+  .modal-content{
+    width: 75%;
   }
 }

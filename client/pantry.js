@@ -10,16 +10,6 @@ $(document).ready(() => {
 	// console.log(editButtons);
 
 	document.getElementById('barcodeInput').onchange = (e) => {
-		// var numItems = document.getElementsByClassName('itemBarcode').length;
-		// var myItems = document.getElementsByClassName('itemBarcode');
-		// var barcode = document.getElementById('barcodeInput').value;
-
-		// for(i = 0; i<numItems; i++){
-		// 	console.log(myItems[i].innerHTML);
-		// 	if (myItems[i].innerHTML.includes(barcode)){
-		// 		console.log('TRUE');
-		// 	}
-		// }
 		let value = e.target.value;
 		if (value.length > 0) {
 			console.log(value);
@@ -30,8 +20,8 @@ $(document).ready(() => {
 				url: url,
 				dataType: "json",
 				success: (result, status, xhr) => {
+
 					document.getElementById("editModal").style.display = 'block';
-					console.log(result);
 					var parent_id = result._id;
 					var itemName =  result.itemName;
 					var quantity =  result.quantity;
@@ -53,9 +43,9 @@ $(document).ready(() => {
 
 				},
 				error: (xhr, status, error) => {
-					
-					// document.getElementsByClassName("formBottom")[0].style.display = 'table-row';
-					console.log(error);
+					e.target.value = "";
+					document.getElementById('barcodeSearchError').style.display = 'block';
+					setTimeout(function () {document.getElementById('barcodeSearchError').style.display='none'}, 5000); 
 				}
 			});
 		}
@@ -171,7 +161,7 @@ $(document).ready(() => {
 				document.getElementById('addToListSuccess').style.display = 'block';
 				// document.getElementById('addToListSuccess').delay(1000).fadeOut(200);
 				setTimeout(function () {document.getElementById('addToListSuccess').style.display='none'}, 5000); 
-				document.getElementById('editModal').style.display = 'none';
+				// document.getElementById('editModal').style.display = 'none';
 				// window.location = result.redirect;
 
 			},
@@ -193,7 +183,8 @@ $(document).ready(() => {
 			url: url,
 			dataType: "json",
 			success: (result, status, xhr) => {
-				window.location = result.redirect;
+				window.location.replace("/");
+				// window.location = result.redirect;
 			},
 			error: (xhr, status, error) => {
 				console.log(error);
@@ -214,10 +205,16 @@ $(document).ready(() => {
 			url: url,
 			dataType: "json",
 			success: (result, status, xhr) => {
-				window.location = result.redirect;
+				console.log(result);
+				if (result === true){
+					document.getElementById("lowButtonIcon_editModal").src = "assets/img/almostEmptyIcon.png";
+				} else {
+					document.getElementById("lowButtonIcon_editModal").src = "assets/img/emptyCircleIcon.png";
+				}
+				// window.location = result.redirect;
 			},
 			error: (xhr, status, error) => {
-				console.log(error);
+				console.log("error");
 			}
 		});
 
