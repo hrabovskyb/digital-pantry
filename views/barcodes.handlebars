@@ -71,6 +71,50 @@
 			{{/if}}
 		</div>
 	</div>
+
+	<div id="editModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h3>Edit Item</h3>
+			<form id="editingForm" action="/editBarcode">
+				<table>
+					<tr>
+						<td class="labelCol"><label for="itemId">Item Id</label></td>
+						<td class="inputCol"><input id="itemIdInput" type="text" name="itemId" readonly></td>
+					</tr>
+					<tr>
+						<td class="labelCol"><label for="itemName">Item Name</label></td>
+						<td class="inputCol"><input id="itemNameInput" type="text" name="itemName"></td>
+					</tr>
+					<tr>
+						<td class="labelCol"><label for="defaultQuantity">Default Quantity</label></td>
+						<td class="inputCol"><input id="defaultQuantityInput" type="number" name="defaultQuantity"></td>
+					</tr>
+					<tr>
+						<td class="labelCol"><label for="UOM">Unit of Measure</label></td>
+						<td class="inputCol"><input id="uomInput" type="text" name="UOM"></td>
+					</tr>
+					<tr>
+						<td class="labelCol"><label for="category">Category</label></td>
+						<td class="inputCol"><input id="categoryInput" type="text" name="category"></td>
+					</tr>
+					
+				</table>
+				
+				
+			</form>
+			<table class="modalIcons">
+				<tr>
+					<td><h5>Save</h5></td>
+					<td><h5>Delete</h5></td>
+				</tr>
+				<tr>
+					<td><a id="editFormSubmit" href="#"><img src="assets/img/saveIcon.png" width="25px"></a></td>
+					<td class="deleteButton_editModal"><a href="#"><img src="assets/img/deleteIcon.png" width="25px"></a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
 	
 	
 	

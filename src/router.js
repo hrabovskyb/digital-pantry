@@ -11,8 +11,11 @@ const router = (app) => {
 	app.post("/barcodeQuery/:barcode",controllers.barcode.barcodeQuery);
 	app.post("/deletePantryItem/:_id",controllers.pantry.deletePantryItem);
 	app.post("/deleteTempItem/:_id",controllers.barcode.deleteTempItem);
+	app.post("/editTempItem/",controllers.barcode.editTempItem);
 	app.post("/deleteBarcode/:_id",controllers.barcode.deleteBarcode);
+	app.post("/editBarcode/",controllers.barcode.editBarcode);
 	app.post("/deleteShoppingItem/:_id",controllers.shoppingList.deleteShoppingItem);
+	app.post("/editShoppingItem/",controllers.shoppingList.editShoppingItem);
 	app.post("/addToShoppingList/:_id",controllers.shoppingList.addToShoppingList);
 	app.post("/toggleLowStatus/:_id",controllers.pantry.toggleLowStatus);
 	app.post('/addBarcode',controllers.barcode.addBarcode);

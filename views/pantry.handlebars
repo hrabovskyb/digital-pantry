@@ -2,21 +2,35 @@
 
 <body>
 	
-	<div class="container">
+	<div class="container" style="margin-bottom: 15px;">
 		<h1>Pantry Items</h1>
 		<table style="margin-top:20px">
 			<tr>
 				<td><label style="margin-right: 10px">Barcode:</label></td>
-				<td><input type="text" name="barcode" id="barcodeInput"></td>
+				<td><input type="text" name="barcode" id="barcodeInput" onfocusout="this.value = ''"></td>
+			</tr>
+			<tr>
+				<td><label style="margin-right: 10px; margin-top: 10px;">Search:</label></td>
+				<td><input style="margin-top: 10px;" type="text" name="searchInput" id="searchInput" ></td>
 			</tr>
 		</table>
+		<div class="dropdown">
+			<button class="btn btn-primary dropdown-toggle" id="dropdownButton" type="button" data-toggle="dropdown" style="margin-top: 10px;">Sort By<span class="caret" style="margin-left: 5px;"></span></button>
+		    <ul class="dropdown-menu">
+				<li><a href="#" onclick="sortList(1)">Item Name</a></li>
+				<li><a href="#" onclick="sortList(4)">Category</a></li>
+				<li><a href="#" onclick="sortList(3)">Low Status</a></li>
+		    </ul>
+		</div>
 	</div>
+
 	<div class="alert alert-success" role="alert" id="addToListSuccess">
 		Successfully added item to shopping list. <a href="/shoppingList" id="popupLink" class="alert-link">Go to list</a>.
 	</div>
 	<div class="alert alert-danger" role="alert" id="barcodeSearchError">
 		This item is not currently in your pantry.
 	</div>
+
 	<div class="container">
 		<div class="row header">
 			<div class="col col-md-3">Item Name</div>
@@ -59,6 +73,10 @@
 						<td class="labelCol"><label for="itemId">Item Id</label></td>
 						<td class="inputCol"><input id="itemIdInput" type="text" name="itemId" readonly></td>
 					</tr>
+					<tr style="display: none;">
+						<td class="labelCol"><label for="barcode">Barcodes</label></td>
+						<td class="inputCol"><input id="barcodeDisplay" type="text" name="barcode" readonly></td>
+					</tr>
 					<tr>
 						<td class="labelCol"><label for="itemName">Item Name</label></td>
 						<td class="inputCol"><input id="itemNameInput" type="text" name="itemName"></td>
@@ -94,13 +112,6 @@
 					<td class="lowButton_editModal"><a href="#"><p class="hiddenLowValue" style="display: none;">{{this.isLow}}</p><img id="lowButtonIcon_editModal" src="assets/img/emptyCircleIcon.png" width="25px"></a></td>
 				</tr>
 			</table>
-			<!-- <div class="col col-md-3 iconCol"><a id="editFormSubmit" href="#">Save Changes</a></div>
-			<div class="col col-md-1 iconCol addButton_editModal"><a href="#"><img src="assets/img/addListIcon.png" width="25px"></a></div>
-			<div class="col col-md-1 iconCol deleteButton_editModal"><a href="#"><img src="assets/img/deleteIcon.png" width="25px"></a></div>
-			<div class="col col-md-1 iconCol lowButton_editModal"><a href="#"><p class="hiddenLowValue" style="display: none;">{{this.isLow}}</p><img class="lowButtonIcon" src="assets/img/emptyCircleIcon.png" width="25px"></a></div>
-			<div class="icons" >
-				
-			</div> -->
 		</div>
 	</div>
 	
@@ -131,6 +142,56 @@
 		document.getElementById('barcodeSearchError').hide(1000);
 	}
 	
+	function sortList(opts) {
+		var list, i, switching, b, shouldSwitch;
+		list = document.getElementById("pantryItems");
+		switching = true;
+		/*Make a loop that will continue until
+		no switching has been done:*/
+		while (switching) {
+		//start by saying: no switching is done:
+			switching = false;
+
+			
+			b = list.children;
+
+			//Loop through all list-items:
+			for (i = 0; i < (b.length - 1); i++) {
+
+				switch (opts){
+					case 1:
+						x = b[i].children[opts].innerHTML.toUpperCase();
+						y = b[i + 1].children[opts].innerHTML.toUpperCase();
+						break;
+					case 4:
+						x = b[i].children[opts].innerHTML.toUpperCase();
+						y = b[i + 1].children[opts].innerHTML.toUpperCase();
+						break;
+					case 3:
+						x = b[i + 1].children[5].children[opts].innerHTML.toUpperCase();
+						y = b[i].children[5].children[opts].innerHTML.toUpperCase();
+						break;
+				}
+				//start by saying there should be no switching:
+				shouldSwitch = false;
+				/*check if the next item should
+				switch place with the current item:*/
+				if (x > y) {
+					/*if next item is alphabetically
+					lower than current item, mark as a switch
+					and break the loop:*/
+					shouldSwitch = true;
+					break;
+				}
+			}
+			if (shouldSwitch) {
+				/*If a switch has been marked, make the switch
+				and mark the switch as done:*/
+				b[i].parentNode.insertBefore(b[i + 1], b[i]);
+				switching = true;
+			}
+		}
+	}
 
 </script>
 

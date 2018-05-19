@@ -25,6 +25,35 @@ const deleteShoppingItem = (req, res) => {
 	});
 }
 
+const editShoppingItem = (req, res) => {
+	let query = {_id: req.body.itemId};
+
+	const itemData = {
+		_id: req.body.itemId,
+		itemName: req.body.itemName,
+		UOM: req.body.UOM,
+		quantity: req.body.quantity,
+		category: req.body.category,
+	};
+	if(req.body.quantity > 0){
+		return shoppingListItem.shoppingListItemModel.updateOne(query,itemData).exec((err)=>{
+			if(err){
+				console.log(err);
+				return res.status(400).json({error: 'An error occured while editing item info'});
+			}
+			return res.json({redirect: '/shoppingList'});
+		});
+	} else {
+		shoppingListItem.shoppingListItemModel.deleteOne({_id: req.body.itemId}).exec((err,docs)=>{
+			if(err){
+				console.log(err);
+				return res.status(400).json({error: 'An error occured'});
+			}
+			return res.json({redirect: '/shoppingList'});
+		});
+	}
+}
+
 const addToShoppingList = (req, res) => {
 	// const convertId = mongoose.Types.ObjectId;
 	pantryItem.pantryItemModel.find({_id: req.params._id}).exec((err,docs) => {
@@ -76,3 +105,4 @@ const addToShoppingList = (req, res) => {
 module.exports.deleteShoppingItem = deleteShoppingItem;
 module.exports.shoppingListPage = shoppingListPage;
 module.exports.addToShoppingList = addToShoppingList;
+module.exports.editShoppingItem = editShoppingItem;

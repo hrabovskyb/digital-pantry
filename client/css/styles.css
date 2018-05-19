@@ -62,8 +62,23 @@ body{
 .pantryItems div{
   padding: 5px;
 }
+#dropdownButton {
+  color: black;
+  font-weight: bold;
+  display: block;
+  padding: 10px;
+  border: 2px solid black;
+  text-align: center;
+  background-color: #ccc;
+  text-decoration: none;
+  width: 100px;
+}
 
-
+#dropdownButton:hover{
+  background-color: #528be0;
+  color: white;
+  cursor: pointer;
+}
 /*---------------------------------Add items styles-------------------------*/
 #tempItemsTable{
   width: 80%;

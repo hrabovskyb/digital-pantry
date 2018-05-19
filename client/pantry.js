@@ -1,18 +1,13 @@
 $(document).ready(() => {
 
 	let pantryObj = {};
-	// let infoModal = document.getElementById("infoModal");
-	// let editModal = document.getElementById("editModal");
 
 	let pantryItems = $("#pantryItems")[0].children;
 	let editButtons = pantryItems[0].children[4];
-	// console.log(pantryItems);
-	// console.log(editButtons);
 
 	document.getElementById('barcodeInput').onchange = (e) => {
 		let value = e.target.value;
 		if (value.length > 0) {
-			console.log(value);
 			let url = "/pantryBarcodeScan/" + value;
 			$.ajax({
 				cache: false,
@@ -28,7 +23,6 @@ $(document).ready(() => {
 					var UOM =  result.UOM;
 					var category =  result.category;
 					var isLow = result.isLow;
-					console.log(isLow);
 					document.getElementById("itemIdInput").value = parent_id;
 					document.getElementById("itemNameInput").value = itemName;
 					document.getElementById("quantityInput").value = quantity;
@@ -51,9 +45,30 @@ $(document).ready(() => {
 		}
 	};
 
+	$(document.getElementById('searchInput')).keyup(function(){
+		let value = document.getElementById('searchInput').value;
+		var pantryItems = document.getElementById('pantryItems').children;
+		for (i = 0; i < pantryItems.length; i++){
+			var item = pantryItems[i].children[1].innerHTML.toUpperCase();
+			if(item.includes(value.toUpperCase()) == true){
+				pantryItems[i].style.display = 'block';
+			} else {
+				pantryItems[i].style.display = 'none';
+			}
+		}
+	});
+
+	// $('#sortBtn').on('click', function() {
+	// 	var divs = document.getElementById('pantryItems').children;
+	// 	var orderedDivs = divs.sort(function(a,b){
+	// 		return $(a).find("itemNameCol").text() > $(b).find("itemNameCol").text();
+	// 	});
+	// 	$('#pantryItems').html(orderedDivs);
+	// });
+
+
 	$('.deleteButton').on('click', function(){
 		var parent_id = $(this).parent().parent().attr('id');
-		console.log(parent_id);
 
 		let url = "/deletePantryItem/" + parent_id;
 		$.ajax({
@@ -73,7 +88,6 @@ $(document).ready(() => {
 
 	$('.deleteButton_editModal').on('click', function(){
 		var parent_id = document.getElementById("itemIdInput").value;
-		console.log(parent_id);
 
 		let url = "/deletePantryItem/" + parent_id;
 		$.ajax({
@@ -93,6 +107,7 @@ $(document).ready(() => {
 
 	$('.editButton').on('click', function(){
 		var parent_id = $(this).parent().parent().attr('id');
+		var barcode = $(this).parent().parent().children()[0].innerHTML;
 		var itemName =  $(this).parent().parent().children()[1].innerHTML;
 		var quantity =  $(this).parent().parent().children()[2].innerHTML;
 		var UOM =  $(this).parent().parent().children()[3].innerHTML;
@@ -100,6 +115,7 @@ $(document).ready(() => {
 		var isLow = $(this).parent().children()[3].children[0].children[0].innerHTML;
 		document.getElementById("editModal").style.display = 'block';
 		document.getElementById("itemIdInput").value = parent_id;
+		document.getElementById("barcodeDisplay").value = barcode;
 		document.getElementById("itemNameInput").value = itemName;
 		document.getElementById("quantityInput").value = quantity;
 		document.getElementById("uomInput").value = UOM;
@@ -125,7 +141,6 @@ $(document).ready(() => {
 
 	$('.addButton').on('click', function(){
 		var parent_id = $(this).parent().parent().attr('id');
-		console.log(parent_id);
 
 		let url = "/addToShoppingList/" + parent_id;
 		$.ajax({
@@ -149,7 +164,6 @@ $(document).ready(() => {
 
 	$('.addButton_editModal').on('click', function(){
 		var parent_id = document.getElementById("itemIdInput").value;
-		console.log(parent_id);
 
 		let url = "/addToShoppingList/" + parent_id;
 		$.ajax({
@@ -205,7 +219,6 @@ $(document).ready(() => {
 			url: url,
 			dataType: "json",
 			success: (result, status, xhr) => {
-				console.log(result);
 				if (result === true){
 					document.getElementById("lowButtonIcon_editModal").src = "assets/img/almostEmptyIcon.png";
 				} else {

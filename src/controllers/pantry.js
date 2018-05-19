@@ -207,6 +207,8 @@ const addToPantry = (req,res) => {
 
 const editPantryItem = (req,res) =>{
 	let query = {_id: req.body.itemId};
+	let barcodeQuery = {barcode: req.body.barcode};
+	var barcodeArray = req.body.barcode.split(",");
 
 	const itemData = {
 		_id: req.body.itemId,
@@ -215,8 +217,23 @@ const editPantryItem = (req,res) =>{
 		quantity: req.body.quantity,
 		category: req.body.category,
 	};
+
+	const barcodeItemData = {
+		itemName: req.body.itemName,
+		UOM: req.body.UOM,
+		category: req.body.category,
+	}
+	
+	barcode.barcodeModel.updateMany({barcode: {$in: barcodeArray}},{$set: barcodeItemData}).exec((err,docs)=>{
+		if(err){
+			console.log(err);
+			return res.status(400).json({error: 'An error occured'});
+		}
+		
+	});
+	
 	if(req.body.quantity > 0){
-		return pantryItem.pantryItemModel.updateOne(query,itemData).exec((err)=>{
+		pantryItem.pantryItemModel.updateOne(query,itemData).exec((err)=>{
 			if(err){
 				console.log(err);
 				return res.status(400).json({error: 'An error occured while editing item info'});
@@ -233,7 +250,7 @@ const editPantryItem = (req,res) =>{
 		});
 	}
 	
-	console.log(itemData);
+	
 }
 
 const pantryBarcodeScan = (req,res) =>{

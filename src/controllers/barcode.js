@@ -66,12 +66,65 @@ const deleteTempItem = (req, res) => {
 		return res.json({redirect: '/addItems'});
 	});
 }
+
+const editTempItem = (req, res) => {
+
+	let query = {_id: req.body.itemId};
+
+	const itemData = {
+		_id: req.body.itemId,
+		itemName: req.body.itemName,
+		UOM: req.body.UOM,
+		quantity: req.body.quantity,
+		category: req.body.category,
+	};
+	if(req.body.quantity > 0){
+		return barcode.tempItemModel.updateOne(query,itemData).exec((err)=>{
+			if(err){
+				console.log(err);
+				return res.status(400).json({error: 'An error occured while editing item info'});
+			}
+			return res.json({redirect: '/addItems'});
+		});
+	} else {
+		barcode.tempItemModel.deleteOne({_id: req.body.itemId}).exec((err,docs)=>{
+			if(err){
+				console.log(err);
+				return res.status(400).json({error: 'An error occured'});
+			}
+			return res.json({redirect: '/addItems'});
+		});
+	}
+}
+
 const deleteBarcode = (req, res) => {
 	console.log(req.params._id);
 	barcode.barcodeModel.deleteOne({_id: req.params._id}).exec((err,docs)=>{
 		if(err){
 			console.log(err);
 			return res.status(400).json({error: 'An error occured during delete barcode'});
+		}
+		return res.json({redirect: '/barcodes'});
+	});
+}
+
+const editBarcode = (req, res) => {
+	let query = {_id: req.body.itemId};
+	
+	const itemData = {
+		_id: req.body.itemId,
+		itemName: req.body.itemName,
+		UOM: req.body.UOM,
+		defaultQuantity: req.body.defaultQuantity,
+		category: req.body.category,
+	};
+
+	// console.log(itemData);
+	
+	return barcode.barcodeModel.updateOne(query,itemData).exec((err)=>{
+		if(err){
+			console.log(err);
+			return res.status(400).json({error: 'An error occured while editing item info'});
 		}
 		return res.json({redirect: '/barcodes'});
 	});
@@ -163,4 +216,6 @@ module.exports.barcodePage = barcodePage;
 module.exports.addItemsPage = addItemsPage;
 module.exports.barcodeQuery = barcodeQuery;
 module.exports.deleteTempItem = deleteTempItem;
+module.exports.editTempItem = editTempItem;
 module.exports.deleteBarcode = deleteBarcode;
+module.exports.editBarcode = editBarcode;
