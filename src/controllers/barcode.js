@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 
 const barcode = models.barcode;
 
+
+
 const addBarcode = (req,res) => {
 	if(!req.body.barcode || !req.body.itemName){
 		return res.status(400).json({error: 'Both barcode and item name are required!'});

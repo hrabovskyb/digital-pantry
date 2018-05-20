@@ -3,45 +3,53 @@
 <body>
 	
 	<div class="container">
-		<h1>Barcodes</h1>		
-	</div>
-	<div id="barcodeFormContainer" class="container">
-		<button id="addBarcodeButton">Add Barcode >></button>
-		<div id="addBarcodeFormDiv"  style="display: none;">
+		<h1>Barcodes</h1>
+		<table style="margin-top:20px">
+			<tr>
+				<td><label style="margin-right: 10px; margin-top: 10px;">Search:</label></td>
+				<td><input style="margin-top: 10px;" type="text" name="searchInput" id="searchInput" placeholder="Item Name" ></td>
+			</tr>
+		</table>
+		<div id="barcodeFormContainer" style="margin-top: 15px;">
+			<button id="addBarcodeButton">Add Barcode >></button>
+			<div id="addBarcodeFormDiv"  style="display: none;">
 
-			<form id="addBarcodeForm" action="/addBarcode">
-				<table>
-					<tr>
-						<td><label for="barcode">Barcode:</label></td>
-						<td><input type="text" name="barcode"></td>
-					</tr>
+				<form id="addBarcodeForm" action="/addBarcode">
+					<table>
+						<tr>
+							<td><label for="barcode">Barcode:</label></td>
+							<td><input type="text" name="barcode"></td>
+						</tr>
 
-					<tr>
-						<td><label for="itemName">Item Name:</label></td>
-						<td><input type="text" name="itemName"></td>
-					</tr>	
+						<tr>
+							<td><label for="itemName">Item Name:</label></td>
+							<td><input type="text" name="itemName"></td>
+						</tr>	
+						
+						<tr>
+							<td><label for="defaultQuantity">Default Quantity:</label></td>
+							<td><input type="number" name="defaultQuantity"></td>
+						</tr>
+						<tr>
+							<td><label for="UOM">Unit of Measure:</label></td>
+							<td><input type="text" name="UOM"></td>
+						</tr>
+						<tr>
+						
+							<td><label for="category">Category:</label></td>
+							<td><input type="text" name="category"></td>
+						</tr>
+					</table>
 					
-					<tr>
-						<td><label for="defaultQuantity">Default Quantity:</label></td>
-						<td><input type="number" name="defaultQuantity"></td>
-					</tr>
-					<tr>
-						<td><label for="UOM">Unit of Measure:</label></td>
-						<td><input type="text" name="UOM"></td>
-					</tr>
-					<tr>
-					
-						<td><label for="category">Category:</label></td>
-						<td><input type="text" name="category"></td>
-					</tr>
-				</table>
-				
-				<!-- <a id="formSubmit" href="#">Submit Form</a> -->
+					<!-- <a id="formSubmit" href="#">Submit Form</a> -->
 
-			</form>
-			<a id="formSubmit">Save</a>
-		</div>
+				</form>
+				<a id="formSubmit">Save</a>
+			</div>
+
+		</div>		
 	</div>
+	
 	
 	<div class="container" id="barcode-table">
 		<div class="row header">
@@ -53,7 +61,7 @@
 			<div class="col col-md-1">Edit</div>
 			<div class="col col-md-1">Delete</div>
 		</div>
-		<div class="itemTable">
+		<div id="barcodeItems" class="itemTable">
 			{{#if items}}
 				{{#each items}}
 					<div id={{this._id}} class="row">

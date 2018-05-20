@@ -7,35 +7,21 @@
 		<table style="margin-top:20px">
 			<tr>
 				<td><label style="margin-right: 10px">Barcode:</label></td>
-				<td><input type="text" name="barcode" id="barcodeInput" onfocusout="this.value = ''"></td>
+				<td><input type="text" name="barcode" id="barcodeInput" placeholder="Scan Barcode" onfocusout="this.value = ''"></td>
 			</tr>
 			<tr>
 				<td><label style="margin-right: 10px; margin-top: 10px;">Search:</label></td>
-				<td><input style="margin-top: 10px;" type="text" name="searchInput" id="searchInput" ></td>
+				<td><input style="margin-top: 10px;" type="text" name="searchInput" id="searchInput" placeholder="Item Name" ></td>
 			</tr>
 		</table>
-		<!-- <div class="dropdown">
-			<button class="btn btn-primary dropdown-toggle" id="dropdownButton" type="button" data-toggle="dropdown" style="margin-top: 10px;">Sort By<span class="caret" style="margin-left: 5px;"></span></button>
-		    <ul class="dropdown-menu">
-				<li><a href="#" onclick="sortList(1)">Item Name</a></li>
-				<li><a href="#" class="active" onclick="sortList(4)">Category</a></li>
-				<li><a href="#" onclick="sortList(3)">Low Status</a></li>
-		    </ul>
-		</div> -->
+		
 		<h3>Sort By:</h3>
 		<div class="btn-group" role="group" aria-label="...">
 			<button type="button" class="btn btn-default" onclick="sortList(1)">Item Name</button>
 			<button type="button" class="btn btn-default active" onclick="sortList(4)">Category</button>
 			<button type="button" class="btn btn-default" onclick="sortList(3)">Low Status</button>
 		</div>
-		<!-- <div class="sortOpts">
-			<h3>Sort By:</h3>
-			<ul>
-				<li class="activeSort" onclick="sortList(1)"><button>Item Name</button></li>
-				<li onclick="sortList(4)"><button>Category</button></li>
-				<li onclick="sortList(3)"><button>Low Status</button></li>
-			</ul>
-		</div> -->
+		
 	</div>
 
 	<div class="alert alert-success" role="alert" id="addToListSuccess">

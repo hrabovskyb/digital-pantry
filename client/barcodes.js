@@ -1,5 +1,20 @@
 
 $(document).ready(() => {
+
+
+	$(document.getElementById('searchInput')).keyup(function(){
+		let value = document.getElementById('searchInput').value;
+		var pantryItems = document.getElementById('barcodeItems').children;
+		for (i = 0; i < pantryItems.length; i++){
+			var item = pantryItems[i].children[1].innerHTML.toUpperCase();
+			if(item.includes(value.toUpperCase()) == true){
+				pantryItems[i].style.display = 'block';
+			} else {
+				pantryItems[i].style.display = 'none';
+			}
+		}
+	});
+
 	document.getElementById('formSubmit').onclick = (e) =>{
 		e.preventDefault();
 
@@ -7,6 +22,8 @@ $(document).ready(() => {
 
 		return false;
 	};
+
+
 
 	document.getElementById('addBarcodeButton').onclick = (e) => {
 		var x = document.getElementById('addBarcodeFormDiv');

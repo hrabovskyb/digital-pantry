@@ -58,14 +58,6 @@ $(document).ready(() => {
 		}
 	});
 
-	// $('#sortBtn').on('click', function() {
-	// 	var divs = document.getElementById('pantryItems').children;
-	// 	var orderedDivs = divs.sort(function(a,b){
-	// 		return $(a).find("itemNameCol").text() > $(b).find("itemNameCol").text();
-	// 	});
-	// 	$('#pantryItems').html(orderedDivs);
-	// });
-
 
 	$('.deleteButton').on('click', function(){
 		var parent_id = $(this).parent().parent().attr('id');
