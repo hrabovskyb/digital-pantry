@@ -14,14 +14,28 @@
 				<td><input style="margin-top: 10px;" type="text" name="searchInput" id="searchInput" ></td>
 			</tr>
 		</table>
-		<div class="dropdown">
+		<!-- <div class="dropdown">
 			<button class="btn btn-primary dropdown-toggle" id="dropdownButton" type="button" data-toggle="dropdown" style="margin-top: 10px;">Sort By<span class="caret" style="margin-left: 5px;"></span></button>
 		    <ul class="dropdown-menu">
 				<li><a href="#" onclick="sortList(1)">Item Name</a></li>
-				<li><a href="#" onclick="sortList(4)">Category</a></li>
+				<li><a href="#" class="active" onclick="sortList(4)">Category</a></li>
 				<li><a href="#" onclick="sortList(3)">Low Status</a></li>
 		    </ul>
+		</div> -->
+		<h3>Sort By:</h3>
+		<div class="btn-group" role="group" aria-label="...">
+			<button type="button" class="btn btn-default" onclick="sortList(1)">Item Name</button>
+			<button type="button" class="btn btn-default active" onclick="sortList(4)">Category</button>
+			<button type="button" class="btn btn-default" onclick="sortList(3)">Low Status</button>
 		</div>
+		<!-- <div class="sortOpts">
+			<h3>Sort By:</h3>
+			<ul>
+				<li class="activeSort" onclick="sortList(1)"><button>Item Name</button></li>
+				<li onclick="sortList(4)"><button>Category</button></li>
+				<li onclick="sortList(3)"><button>Low Status</button></li>
+			</ul>
+		</div> -->
 	</div>
 
 	<div class="alert alert-success" role="alert" id="addToListSuccess">
@@ -162,14 +176,17 @@
 					case 1:
 						x = b[i].children[opts].innerHTML.toUpperCase();
 						y = b[i + 1].children[opts].innerHTML.toUpperCase();
+						var activebtn = 0;
 						break;
 					case 4:
 						x = b[i].children[opts].innerHTML.toUpperCase();
 						y = b[i + 1].children[opts].innerHTML.toUpperCase();
+						var activebtn = 1;
 						break;
 					case 3:
 						x = b[i + 1].children[5].children[opts].innerHTML.toUpperCase();
 						y = b[i].children[5].children[opts].innerHTML.toUpperCase();
+						var activebtn = 2;
 						break;
 				}
 				//start by saying there should be no switching:
@@ -191,6 +208,15 @@
 				switching = true;
 			}
 		}
+		var btn = document.getElementsByClassName("btn-group")[0].children;
+		for (i=0; i < btn.length; i++){
+			btn[i].classList.remove("active");
+		}
+		btn = btn[activebtn];
+		console.log(btn);
+		// .children[2].children[activebtn];
+		btn.className += " active";
+		// .add("acitve");
 	}
 
 </script>

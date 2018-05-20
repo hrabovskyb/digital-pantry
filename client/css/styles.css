@@ -62,23 +62,19 @@ body{
 .pantryItems div{
   padding: 5px;
 }
-#dropdownButton {
-  color: black;
-  font-weight: bold;
-  display: block;
-  padding: 10px;
-  border: 2px solid black;
-  text-align: center;
-  background-color: #ccc;
-  text-decoration: none;
-  width: 100px;
+
+.btn-group{
+  width: 50%;
+}
+.btn-group button{
+  width: 33%;
 }
 
-#dropdownButton:hover{
-  background-color: #528be0;
+.btn-group .active, .btn-group .active:focus{
+  background-color: #1f58ad;
   color: white;
-  cursor: pointer;
 }
+
 /*---------------------------------Add items styles-------------------------*/
 #tempItemsTable{
   width: 80%;
@@ -377,5 +373,11 @@ body{
   }
   .modal-content{
     width: 75%;
+  }
+  .btn-group{
+    width: 100%;
+  }
+  .btn-group button{
+    font-size: 24px;
   }
 }

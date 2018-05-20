@@ -17,7 +17,7 @@ const indexPage = (req, res) =>{
 
 
 const pantryPage = (req, res) => {
-	pantryItem.pantryItemModel.find({}).exec((err,docs)=>{
+	pantryItem.pantryItemModel.find({}).sort({category: 1}).exec((err,docs)=>{
 		
 		if(err){
 			console.log(err);
